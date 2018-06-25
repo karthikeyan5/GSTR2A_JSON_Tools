@@ -5,17 +5,15 @@ import xlsxwriter
 
 
 folder_path = './data' # folder path containing the GSTR2A zip files
-excel_file_name = 'GSTR2.xlsx'
+excel_file_name = './data/GSTR2.xlsx'
 
 
 workbook = xlsxwriter.Workbook(excel_file_name)
 worksheet_b2b = workbook.add_worksheet('b2b')
 row = 0
 worksheet_b2b.write_row(row,0,['Filing Period','Supplier Filing Status','Supplier GSTIN','Supplier Name','Invoice Number',
-                                'Invoice Date','Customer GSTIN','Place of Supply (State Code)','Reverse Charge',
+                                'Invoice Date','GSTIN of the taxpayer','Place of Supply (State Code)','Reverse Charge',
                                 'Taxable Amount','IGST Amount','CGST Amount','SGST Amount','Cess Amount','Invoice Value'])
-
-zipfile_list = []
 
 def main():
     global row
