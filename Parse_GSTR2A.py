@@ -20,20 +20,21 @@ def main():
     for file in os.listdir(folder_path):
         if file[-3:] == 'zip':
             with zipfile.ZipFile(folder_path + '/' +file) as myzip:
-                print(myzip.namelist()[0])
+                # print(myzip.namelist()[0])
                 if myzip.namelist()[0][-4:] == 'json':
                     with myzip.open(myzip.namelist()[0]) as myfile:
                         parsed_json = json.loads(myfile.read().decode('utf-8'))
-                        print(parsed_json.keys())
+                        # print(parsed_json.keys())
                         # dict_keys(['gstin', 'cdn', 'b2b', 'fp'])
+                        print(parsed_json['fp'])
                         if 'b2b' in parsed_json:
                             for supplier in parsed_json['b2b']:
                                 for inv in supplier['inv']:
                                     inv_values = calc_inv_value(inv['itms'])
-                                    print(parsed_json['fp'],supplier['cfs'],supplier['ctin'],supplier['cname'],
-                                    inv['inum'],inv['idt'],parsed_json['gstin'],parsed_json['gstin'][:2],
-                                    inv['rchrg'],inv_values['txval'],inv_values['iamt'],inv_values['camt'],
-                                    inv_values['samt'],inv_values['csamt'],inv['val'])
+                                    # print(parsed_json['fp'],supplier['cfs'],supplier['ctin'],supplier['cname'],
+                                    # inv['inum'],inv['idt'],parsed_json['gstin'],parsed_json['gstin'][:2],
+                                    # inv['rchrg'],inv_values['txval'],inv_values['iamt'],inv_values['camt'],
+                                    # inv_values['samt'],inv_values['csamt'],inv['val'])
                                     row += 1
                                     worksheet_b2b.write_row(row,0,[parsed_json['fp'],supplier['cfs'],
                                     supplier['ctin'],supplier['cname'],
